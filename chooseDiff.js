@@ -3,7 +3,7 @@ btnChooseDiff.addEventListener('click', (event) => {
     console.log('тык');
     console.log(event);
     btnChooseDiff.classList.toggle("black-focus");
-})
+});
 
 const boxDiff = document.querySelectorAll(".box-diff");
 
