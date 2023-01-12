@@ -1,0 +1,120 @@
+@font-face {
+    font-family: "SkyEng";
+    src: url(./res/stratosskyengweb-mediumitalic.woff2) format("wolf2");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: SkyEng, Arial;
+}
+
+.content {
+    position: relative;
+    width: 100%;
+    height: 774px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    background: #004980;
+}
+.box-active {
+    width: 480px;
+    height: 459px;
+    left: 272px;
+    top: 158px;
+
+    background: #c2f5ff;
+    border-radius: 12px;
+}
+
+.box-h2 {
+    text-align: center;
+    padding-top: 52px;
+}
+
+.box-number {
+    width: 96px;
+    height: 98px;
+    left: 587px;
+    top: 354px;
+    font-family: "StratosSkyeng";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 72px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #0080c1;
+    justify-content: center;
+}
+
+.box-diffs {
+    gap: 24px;
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+}
+
+.box-diff {
+    width: 98px;
+    height: 98px;
+    left: 585px;
+    top: 354px;
+
+    background: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.box-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 66px;
+}
+
+.btn_diff-submit {
+    width: 246px;
+    height: 48px;
+    left: 389px;
+    top: 519px;
+
+    /* Pres → Caption S */
+
+    font-family: "StratosSkyeng";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    /* or 133% */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-feature-settings: "pnum" on, "lnum" on;
+
+    color: #ffffff;
+    width: 246px;
+    height: 50px;
+    left: 389px;
+    top: 519px;
+
+    background: #7ac100;
+    border-radius: 12px;
+}
+//анимация на странице выбора сложности
+.black-focus {
+    background-color: black;
+}

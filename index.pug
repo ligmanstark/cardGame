@@ -1,0 +1,20 @@
+extends main 
+
+block var 
+    - var pageTitle = 'Card Game'
+
+block content
+    .content 
+        .box-active
+            .box-h2  
+                h2.box Выбор сложности
+            .box-diffs  
+                .box-diff 
+                    .box-number 1
+                .box-diff 
+                    .box-number 2
+                .box-diff 
+                    .box-number 3
+            .box-btn 
+                button.btn_diff-submit Старт
+    script(src="./chooseDiff.js")             
