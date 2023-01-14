@@ -114,9 +114,43 @@ body {
     background: #7ac100;
     border-radius: 12px;
 }
+
+.game-field {
+    position: relative;
+    width: 100%;
+    height: 774px;
+    background: #004980;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.box-box--active {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.box-numbers {
+    display: flex;
+    gap: 24px;
+    margin-left: 24px;
+}
+
+.box-time {
+    font-size: 48px;
+}
+
+.box-sec {
+    margin-left: 18px;
+}
+
 //анимация на странице выбора сложности
 .black-focus {
-    background-color: darkgrey;
+    background-color: black;
 }
 
 
