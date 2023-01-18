@@ -64,7 +64,8 @@ body {
     margin-top: 48px;
 }
 
-.box-diff {
+.box-diff,
+.box-number {
     width: 98px;
     height: 98px;
     left: 585px;
@@ -122,7 +123,7 @@ body {
     background: #004980;
 }
 
-.box {
+.box-d {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -149,9 +150,25 @@ body {
 }
 
 //анимация на странице выбора сложности
-.black-focus {
+.grey-focus {
+    background-color: darkgray;
+    width: 98px;
+    height: 98px;
+    left: 585px;
+    top: 354px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    font-size: 16px;
+    align-items: center;
+}
+
+.black-focus{
     background-color: black;
 }
 
-
-
+.hide{
+    display: none;
+}
