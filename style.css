@@ -83,7 +83,8 @@ body {
   margin-top: 66px;
 }
 
-.btn_diff-submit {
+.btn_diff-submit,
+.btn_diff-back {
   width: 246px;
   height: 48px;
   left: 389px;
@@ -157,7 +158,11 @@ body {
   align-items: center;
 }
 
-.black-focus {
+.btn_diff-submit:hover {
+  background-color: black;
+}
+
+.btn_diff-back:hover {
   background-color: black;
 }
 
