@@ -121,6 +121,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 4px;
 }
 
 .box-box--active {
@@ -159,7 +160,30 @@ body {
 }
 
 .box-field-active {
-  display: flex;
+  display: grid;
+  grid-gap: 20px;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.box-field-active--small {
+  grid-template-columns: 100px 100px 100px;
+}
+
+.box-field-active--medium {
+  grid-template-columns: 100px 100px 100px 100px;
+}
+
+.box-field-active--large {
+  grid-template-columns: repeat(6, 100px);
+}
+
+.field-active {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
 }
 
 .btn_diff-submit:hover {

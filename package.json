@@ -1,5 +1,35 @@
 {
-  "dependencies": {
-    "pug": "3.0.2"
-  }
+	"dependencies": {
+		"notyf": "3.10.0",
+		"pug": "3.0.2",
+		"sweetalert2": "11.7.1"
+	},
+	"name": "cardgame",
+	"description": "SkyPro",
+	"version": "1.0.0",
+	"main": "gameCore.js",
+	"directories": {
+		"lib": "lib"
+	},
+	"devDependencies": {
+		"eslint": "8.32.0",
+		"eslint-config-prettier": "8.6.0",
+		"eslint-plugin-prettier": "4.2.1",
+		"husky": "8.0.3",
+		"prettier": "2.8.3"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write ./src/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ligmanstark/cardGame.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ligmanstark/cardGame/issues"
+	},
+	"homepage": "https://github.com/ligmanstark/cardGame#readme"
 }
