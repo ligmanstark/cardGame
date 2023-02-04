@@ -34,22 +34,25 @@
         </div>
       </div>
     </div>
-    <script src="./lib/deck.js"></script>
-    <script src="./lib/deck-generate.js"></script>
-    <script src="./lib/templateEngine.js"> </script>
-    <script src="./lib/gameCore.js"></script>
-    <script src="./lib/chooseDiff.js"></script>
-    <script src="./lib/route.js"> </script>
-    <script src="./lib/cardField.js"> </script>
-    <script src="./lib/timer.js"></script>
+    <script src="./lib/deck.js" type="module"></script>
+    <script src="./lib/deck-generate.js"
+      type="module"></script>
+    <script src="./lib/templateEngine.js"
+      type="module"> </script>
+    <script src="./lib/gameCore.js" type="module"></script>
+    <script src="./lib/chooseDiff.js"
+      type="module"></script>
+    <script src="./lib/route.js" type="module"> </script>
+    <script src="./lib/cardField.js"
+      type="module"> </script>
+    <script src="./lib/timer.js" type="module"></script>
     <script
-      src="./node_modules/notyf/notyf.min.js"></script>
+      src="./node_modules/notyf/notyf.min.js" type="module"></script>
     <script
-      src="./node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <script>
-      const notyf = new Notyf();
-      // notyf.error('You must fill out the form before moving forward');
-      // notyf.success('Your changes have been successfully saved!');
+      src="./node_modules/sweetalert2/dist/sweetalert2.all.min.js" type="module"></script>
+    <script type="module">
+      import backOnChooseDiff from "../lib/route.js"
+      export const notyf = new Notyf();
     </script>
   </body>
 
