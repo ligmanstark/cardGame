@@ -35,7 +35,6 @@ module.exports = {
 	plugins: [
 		new MiniCssExtractPlugin(),
 		new CopyPlugin({
-			patterns: [{ from: 'img', to: 'static' }],
 			patterns: [{ from: 'res', to: 'static' }],
 		}),
 		new HtmlWebpackPlugin({

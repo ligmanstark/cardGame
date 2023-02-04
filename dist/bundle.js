@@ -26,12 +26,24 @@ const cardFieldRender = i => {
     cls: 'field-active',
     content: [{
       tag: 'div',
-      cls: 'suit',
+      cls: ['suit', 'hide'],
       content: i.suit
     }, {
       tag: 'div',
-      cls: 'value',
+      cls: ['value', 'hide'],
       content: i.value
+    }, {
+      tag: 'img',
+      cls: ['card'],
+      attrs: {
+        src: `./static/img/cards/${i.value + ' ' + i.suit}.svg`
+      }
+    }, {
+      tag: 'img',
+      cls: ['rubashka'],
+      attrs: {
+        src: './static/img/rubashka.png'
+      }
     }]
   };
 };
@@ -54,6 +66,10 @@ const visualCardField = decka => {
       break;
   }
 };
+document.addEventListener('click', event => {
+  const target = event.target;
+  console.log(target);
+});
 
 /***/ }),
 
@@ -67,6 +83,7 @@ const visualCardField = decka => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "boxActive": () => (/* binding */ boxActive),
+/* harmony export */   "boxHide": () => (/* binding */ boxHide),
 /* harmony export */   "boxNumber": () => (/* binding */ boxNumber),
 /* harmony export */   "btnChooseDiff": () => (/* binding */ btnChooseDiff),
 /* harmony export */   "card": () => (/* binding */ card),
@@ -129,6 +146,16 @@ btnChooseDiff.addEventListener('click', event => {
       console.warn(Error);
       break;
   }
+  const rubFlip = document.querySelectorAll('.rubashka');
+  const fieldFlip = document.querySelectorAll('.field-active');
+  const cardFlip = document.querySelectorAll('.card');
+  function flipCard() {
+    console.log('flip');
+    this.classList.toggle('flipped');
+  }
+  rubFlip.forEach(card => card.addEventListener('click', flipCard));
+  fieldFlip.forEach(card => card.addEventListener('click', flipCard));
+  cardFlip.forEach(card => card.addEventListener('click', flipCard));
 });
 const boxDiff = document.querySelectorAll('.box-diff');
 const boxNumber = document.querySelectorAll('.box-number');
@@ -144,10 +171,10 @@ let shacoBox; //Shaco the best jungler
 
 //прописываем самозванца
 const boxHide = document.createElement('div');
-boxHide.classList.add('grey-focus');
-boxHide.textContent = 'выбрано';
 boxNumber.forEach(box => {
   box.addEventListener('click', event => {
+    boxHide.classList.add('grey-focus');
+    boxHide.textContent = 'выбрано';
     box.append(boxHide);
     boxDataSetValue = box.dataset.value;
     boxDataSetStatus = 'start';
@@ -240,8 +267,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-const SUITS = ['♠', '♣', '♦', '♥'];
-const VALUES = ['6', '7', '8', '9', '10', 'B', 'Q', 'K', 'A'];
+// const SUITS = ['♠', '♣', '♦', '♥'];
+const SUITS = ['бубны', 'крести', 'черви', 'пики'];
+
+// const VALUES = ['6', '7', '8', '9', '10', 'B', 'Q', 'K', 'A'];
+const VALUES = ['6', '7', '8', '9', '10', 'валет', 'дама', 'король', 'туз'];
 class Deck {
   constructor(cards = freshDeck()) {
     this.cards = cards;
@@ -304,7 +334,9 @@ const logic = window.application = {
   diff: {},
   status: [],
   generateCards: [],
-  takeCards: []
+  takeCards: [],
+  flippedCards: 0,
+  flipTotal: 0
 };
 
 // - Время, затраченное на игру.
@@ -395,6 +427,8 @@ function backOnChooseDiff() {
   _cardField__WEBPACK_IMPORTED_MODULE_2__.boxFieldActive.classList.remove('box-field-active--medium');
   _cardField__WEBPACK_IMPORTED_MODULE_2__.boxFieldActive.classList.remove('box-field-active--large');
   clearInterval(_timer__WEBPACK_IMPORTED_MODULE_3__.ticker);
+  _chooseDiff__WEBPACK_IMPORTED_MODULE_0__.boxHide.classList.remove('grey-focus');
+  _chooseDiff__WEBPACK_IMPORTED_MODULE_0__.boxHide.textContent = '';
 }
 window.backOnChooseDiff = backOnChooseDiff;
 
@@ -536,7 +570,7 @@ const tick = () => {
   } else {
     clearInterval(ticker);
     sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-      title: 'Error!',
+      title: ':(',
       text: 'Вы проиграли!',
       icon: 'error',
       confirmButtonText: 'Начать сначала'
@@ -579,7 +613,7 @@ var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n@font-face {\n  font-family: \"SkyEng\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"wolf2\");\n}\n* {\n  margin: 0;\n  padding: 0;\n}\n\nbody {\n  font-family: SkyEng, Arial;\n}\n\n.content {\n  position: relative;\n  width: 100%;\n  height: 774px;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  align-content: center;\n  justify-content: center;\n  align-items: center;\n  background: #004980;\n}\n\n.box-active {\n  width: 480px;\n  height: 459px;\n  left: 272px;\n  top: 158px;\n  background: #c2f5ff;\n  border-radius: 12px;\n}\n\n.box-h2 {\n  text-align: center;\n  padding-top: 52px;\n}\n\n.box-number {\n  width: 96px;\n  height: 98px;\n  left: 587px;\n  top: 354px;\n  font-family: \"StratosSkyeng\";\n  font-style: normal;\n  font-weight: 400;\n  font-size: 64px;\n  line-height: 72px;\n  display: flex;\n  align-items: center;\n  text-align: center;\n  color: #0080c1;\n  justify-content: center;\n}\n\n.box-diffs {\n  gap: 24px;\n  display: flex;\n  justify-content: center;\n  margin-top: 48px;\n}\n\n.box-diff,\n.box-number {\n  width: 98px;\n  height: 98px;\n  left: 585px;\n  top: 354px;\n  background: #ffffff;\n  border-radius: 12px;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n}\n\n.box-btn {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  margin-top: 66px;\n}\n\n.btn_diff-submit,\n.btn_diff-back {\n  width: 246px;\n  height: 48px;\n  left: 389px;\n  top: 519px;\n  /* Pres → Caption S */\n  font-family: \"StratosSkyeng\";\n  font-style: normal;\n  font-weight: 400;\n  font-size: 24px;\n  line-height: 32px;\n  /* or 133% */\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  font-feature-settings: \"pnum\" on, \"lnum\" on;\n  color: #ffffff;\n  width: 246px;\n  height: 50px;\n  left: 389px;\n  top: 519px;\n  background: #7ac100;\n  border-radius: 12px;\n}\n\n.game-field {\n  position: relative;\n  width: 100%;\n  height: 774px;\n  background: #004980;\n}\n\n.box-d {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  margin: 4px;\n}\n\n.box-box--active {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n}\n\n.box-numbers {\n  display: flex;\n  gap: 24px;\n  margin-left: 24px;\n}\n\n.box-time {\n  font-size: 48px;\n}\n\n.box-sec {\n  margin-left: 18px;\n}\n\n.grey-focus {\n  background-color: darkgray;\n  width: 98px;\n  height: 98px;\n  left: 585px;\n  top: 354px;\n  border-radius: 12px;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  text-align: center;\n  font-size: 16px;\n  align-items: center;\n}\n\n.box-field-active {\n  display: grid;\n  grid-gap: 20px;\n  justify-content: center;\n  margin-top: 60px;\n}\n\n.box-field-active--small {\n  grid-template-columns: 100px 100px 100px;\n}\n\n.box-field-active--medium {\n  grid-template-columns: 100px 100px 100px 100px;\n}\n\n.box-field-active--large {\n  grid-template-columns: repeat(6, 100px);\n}\n\n.field-active {\n  background-color: #444;\n  color: #fff;\n  border-radius: 5px;\n  padding: 20px;\n  font-size: 150%;\n}\n\n.btn_diff-submit:hover {\n  background-color: black;\n}\n\n.btn_diff-back:hover {\n  background-color: black;\n}\n\n.hide {\n  display: none;\n}/*# sourceMappingURL=style.css.map */", "",{"version":3,"sources":["webpack://./style.css","webpack://./style.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACAhB;EACI,qBAAA;EACA,4DAAA;ADEJ;ACCA;EACI,SAAA;EACA,UAAA;ADCJ;;ACEA;EACI,0BAAA;ADCJ;;ACEA;EACI,kBAAA;EACA,WAAA;EACA,aAAA;EACA,aAAA;EACA,sBAAA;EACA,eAAA;EACA,qBAAA;EACA,uBAAA;EACA,mBAAA;EAEA,mBAAA;ADAJ;;ACEA;EACI,YAAA;EACA,aAAA;EACA,WAAA;EACA,UAAA;EAEA,mBAAA;EACA,mBAAA;ADAJ;;ACGA;EACI,kBAAA;EACA,iBAAA;ADAJ;;ACGA;EACI,WAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EACA,4BAAA;EACA,kBAAA;EACA,gBAAA;EACA,eAAA;EACA,iBAAA;EACA,aAAA;EACA,mBAAA;EACA,kBAAA;EACA,cAAA;EACA,uBAAA;ADAJ;;ACGA;EACI,SAAA;EACA,aAAA;EACA,uBAAA;EACA,gBAAA;ADAJ;;ACGA;;EAEI,WAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EAEA,mBAAA;EACA,mBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;ADDJ;;ACIA;EACI,aAAA;EACA,mBAAA;EACA,uBAAA;EACA,gBAAA;ADDJ;;ACIA;;EAEI,YAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EAEA,qBAAA;EAEA,4BAAA;EACA,kBAAA;EACA,gBAAA;EACA,eAAA;EACA,iBAAA;EACA,YAAA;EAEA,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,kBAAA;EACA,2CAAA;EAEA,cAAA;EACA,YAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EAEA,mBAAA;EACA,mBAAA;ADNJ;;ACSA;EACI,kBAAA;EACA,WAAA;EACA,aAAA;EACA,mBAAA;ADNJ;;ACSA;EACI,aAAA;EACA,mBAAA;EACA,8BAAA;EACA,WAAA;ADNJ;;ACSA;EACI,aAAA;EACA,mBAAA;EACA,uBAAA;ADNJ;;ACSA;EACI,aAAA;EACA,SAAA;EACA,iBAAA;ADNJ;;ACSA;EACI,eAAA;ADNJ;;ACSA;EACI,iBAAA;ADNJ;;ACUA;EACI,0BAAA;EACA,WAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EACA,mBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;EACA,kBAAA;EACA,eAAA;EACA,mBAAA;ADPJ;;ACUA;EACI,aAAA;EACA,cAAA;EACA,uBAAA;EACA,gBAAA;ADPJ;;ACSA;EACI,wCAAA;ADNJ;;ACQA;EACI,8CAAA;ADLJ;;ACOA;EACI,uCAAA;ADJJ;;ACOA;EACI,sBAAA;EACA,WAAA;EACA,kBAAA;EACA,aAAA;EACA,eAAA;ADJJ;;ACOA;EACI,uBAAA;ADJJ;;ACMA;EACI,uBAAA;ADHJ;;ACMA;EACI,aAAA;ADHJ,CAAA,oCAAA","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n@font-face {\n  font-family: \"SkyEng\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"wolf2\");\n}\n* {\n  margin: 0;\n  padding: 0;\n}\n\nbody {\n  font-family: SkyEng, Arial;\n}\n\n.content {\n  position: relative;\n  width: 100%;\n  height: 774px;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  align-content: center;\n  justify-content: center;\n  align-items: center;\n  background: #004980;\n}\n\n.box-active {\n  width: 480px;\n  height: 459px;\n  left: 272px;\n  top: 158px;\n  background: #c2f5ff;\n  border-radius: 12px;\n}\n\n.box-h2 {\n  text-align: center;\n  padding-top: 52px;\n}\n\n.box-number {\n  width: 96px;\n  height: 98px;\n  left: 587px;\n  top: 354px;\n  font-family: \"StratosSkyeng\";\n  font-style: normal;\n  font-weight: 400;\n  font-size: 64px;\n  line-height: 72px;\n  display: flex;\n  align-items: center;\n  text-align: center;\n  color: #0080c1;\n  justify-content: center;\n}\n\n.box-diffs {\n  gap: 24px;\n  display: flex;\n  justify-content: center;\n  margin-top: 48px;\n}\n\n.box-diff,\n.box-number {\n  width: 98px;\n  height: 98px;\n  left: 585px;\n  top: 354px;\n  background: #ffffff;\n  border-radius: 12px;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n}\n\n.box-btn {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  margin-top: 66px;\n}\n\n.btn_diff-submit,\n.btn_diff-back {\n  width: 246px;\n  height: 48px;\n  left: 389px;\n  top: 519px;\n  /* Pres → Caption S */\n  font-family: \"StratosSkyeng\";\n  font-style: normal;\n  font-weight: 400;\n  font-size: 24px;\n  line-height: 32px;\n  /* or 133% */\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  font-feature-settings: \"pnum\" on, \"lnum\" on;\n  color: #ffffff;\n  width: 246px;\n  height: 50px;\n  left: 389px;\n  top: 519px;\n  background: #7ac100;\n  border-radius: 12px;\n}\n\n.game-field {\n  position: relative;\n  width: 100%;\n  height: 774px;\n  background: #004980;\n}\n\n.box-d {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  margin: 4px;\n}\n\n.box-box--active {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n}\n\n.box-numbers {\n  display: flex;\n  gap: 24px;\n  margin-left: 24px;\n}\n\n.box-time {\n  font-size: 48px;\n}\n\n.box-sec {\n  margin-left: 18px;\n}\n\n.grey-focus {\n  background-color: darkgray;\n  width: 98px;\n  height: 98px;\n  left: 585px;\n  top: 354px;\n  border-radius: 12px;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  text-align: center;\n  font-size: 16px;\n  align-items: center;\n}\n\n.box-field-active {\n  display: grid;\n  justify-content: center;\n  margin-top: 60px;\n}\n\n.box-field-active--small {\n  grid-template-columns: 100px 100px 100px;\n}\n\n.box-field-active--medium {\n  grid-template-columns: 100px 100px 100px 100px;\n}\n\n.box-field-active--large {\n  grid-template-columns: repeat(6, 100px);\n}\n\n.field-active {\n  position: relative;\n  cursor: pointer;\n  color: #fff;\n  border-radius: 5px;\n  padding: 20px;\n  font-size: 150%;\n  margin: auto;\n  width: 75px;\n  height: 100px;\n}\n\n.rubashka {\n  width: 96px;\n  height: 133px;\n  background-size: cover;\n}\n\n.card,\n.rubashka {\n  position: absolute;\n  border-radius: 5px;\n  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);\n  -webkit-backface-visibility: hidden;\n          backface-visibility: hidden;\n}\n\n.card {\n  font-size: 28pt;\n  text-align: center;\n  line-height: 100px;\n  transform: rotateY(180deg);\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n\n.field-active.flipped .rubashka {\n  transform: rotateY(180deg) rotateZ(50deg);\n}\n\n.field-active.flipped .card {\n  transform: rotateY(0) rotateZ(0);\n}\n\n.btn_diff-submit:hover {\n  background-color: black;\n}\n\n.btn_diff-back:hover {\n  background-color: black;\n}\n\n.hide {\n  display: none;\n}/*# sourceMappingURL=style.css.map */", "",{"version":3,"sources":["webpack://./style.css","webpack://./style.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACAhB;EACI,qBAAA;EACA,4DAAA;ADEJ;ACCA;EACI,SAAA;EACA,UAAA;ADCJ;;ACEA;EACI,0BAAA;ADCJ;;ACEA;EACI,kBAAA;EACA,WAAA;EACA,aAAA;EACA,aAAA;EACA,sBAAA;EACA,eAAA;EACA,qBAAA;EACA,uBAAA;EACA,mBAAA;EAEA,mBAAA;ADAJ;;ACEA;EACI,YAAA;EACA,aAAA;EACA,WAAA;EACA,UAAA;EAEA,mBAAA;EACA,mBAAA;ADAJ;;ACGA;EACI,kBAAA;EACA,iBAAA;ADAJ;;ACGA;EACI,WAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EACA,4BAAA;EACA,kBAAA;EACA,gBAAA;EACA,eAAA;EACA,iBAAA;EACA,aAAA;EACA,mBAAA;EACA,kBAAA;EACA,cAAA;EACA,uBAAA;ADAJ;;ACGA;EACI,SAAA;EACA,aAAA;EACA,uBAAA;EACA,gBAAA;ADAJ;;ACGA;;EAEI,WAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EAEA,mBAAA;EACA,mBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;ADDJ;;ACIA;EACI,aAAA;EACA,mBAAA;EACA,uBAAA;EACA,gBAAA;ADDJ;;ACIA;;EAEI,YAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EAEA,qBAAA;EAEA,4BAAA;EACA,kBAAA;EACA,gBAAA;EACA,eAAA;EACA,iBAAA;EACA,YAAA;EAEA,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,kBAAA;EACA,2CAAA;EAEA,cAAA;EACA,YAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EAEA,mBAAA;EACA,mBAAA;ADNJ;;ACSA;EACI,kBAAA;EACA,WAAA;EACA,aAAA;EACA,mBAAA;ADNJ;;ACSA;EACI,aAAA;EACA,mBAAA;EACA,8BAAA;EACA,WAAA;ADNJ;;ACSA;EACI,aAAA;EACA,mBAAA;EACA,uBAAA;ADNJ;;ACSA;EACI,aAAA;EACA,SAAA;EACA,iBAAA;ADNJ;;ACSA;EACI,eAAA;ADNJ;;ACSA;EACI,iBAAA;ADNJ;;ACUA;EACI,0BAAA;EACA,WAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EACA,mBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;EACA,kBAAA;EACA,eAAA;EACA,mBAAA;ADPJ;;ACUA;EACI,aAAA;EAEA,uBAAA;EACA,gBAAA;ADRJ;;ACUA;EACI,wCAAA;ADPJ;;ACSA;EACI,8CAAA;ADNJ;;ACQA;EACI,uCAAA;ADLJ;;ACQA;EACI,kBAAA;EACA,eAAA;EAEA,WAAA;EACA,kBAAA;EACA,aAAA;EACA,eAAA;EACA,YAAA;EACA,WAAA;EACA,aAAA;ADNJ;;ACSA;EAEI,WAAA;EACA,aAAA;EACA,sBAAA;ADPJ;;ACUA;;EAEI,kBAAA;EACA,kBAAA;EAKA,uDAAA;EACA,mCAAA;UAAA,2BAAA;ADXJ;;ACcA;EACI,eAAA;EACA,kBAAA;EACA,kBAAA;EACA,0BAAA;EACA,yBAAA;KAAA,sBAAA;MAAA,qBAAA;UAAA,iBAAA;ADXJ;;ACcA;EACI,yCAAA;ADXJ;;ACcA;EACI,gCAAA;ADXJ;;ACcA;EACI,uBAAA;ADXJ;;ACaA;EACI,uBAAA;ADVJ;;ACaA;EACI,aAAA;ADVJ,CAAA,oCAAA","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

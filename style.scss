@@ -169,7 +169,7 @@ body {
 
 .box-field-active {
     display: grid;
-    grid-gap: 20px;
+    // row-gap: 100px;
     justify-content: center;
     margin-top: 60px;
 }
@@ -184,11 +184,51 @@ body {
 }
 
 .field-active {
-    background-color: #444;
+    position: relative;
+    cursor: pointer;
+    // background-color: #444;
     color: #fff;
     border-radius: 5px;
     padding: 20px;
     font-size: 150%;
+    margin: auto;
+    width: 75px;
+    height: 100px;
+}
+
+.rubashka {
+    // background: url(./res/img/rubashka.png);
+    width: 96px;
+    height: 133px;
+    background-size: cover;
+}
+
+.card,
+.rubashka {
+    position: absolute;
+    border-radius: 5px;
+    // width: 100%;
+    // height: 100%;
+    // background: url(./res/img/rubashka.png);
+
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+}
+
+.card {
+    font-size: 28pt;
+    text-align: center;
+    line-height: 100px;
+    transform: rotateY(180deg);
+    user-select: none;
+}
+
+.field-active.flipped .rubashka {
+    transform: rotateY(180deg) rotateZ(50deg);
+}
+
+.field-active.flipped .card {
+    transform: rotateY(0) rotateZ(0);
 }
 
 .btn_diff-submit:hover {
