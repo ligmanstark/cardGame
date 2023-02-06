@@ -12,6 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "boxFieldActive": () => (/* binding */ boxFieldActive),
 /* harmony export */   "cardFieldRender": () => (/* binding */ cardFieldRender),
+/* harmony export */   "cardsMatch": () => (/* binding */ cardsMatch),
 /* harmony export */   "visualCardField": () => (/* binding */ visualCardField)
 /* harmony export */ });
 /* harmony import */ var _chooseDiff__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chooseDiff */ "./lib/chooseDiff.js");
@@ -23,7 +24,10 @@ __webpack_require__.r(__webpack_exports__);
 const cardFieldRender = i => {
   return {
     tag: 'div',
-    cls: 'field-active',
+    cls: ['field-active', 'flipped'],
+    attrs: {
+      data: `${i.value + ' ' + i.suit}.svg`
+    },
     content: [{
       tag: 'div',
       cls: ['suit', 'hide'],
@@ -36,13 +40,16 @@ const cardFieldRender = i => {
       tag: 'img',
       cls: ['card'],
       attrs: {
-        src: `./static/img/cards/${i.value + ' ' + i.suit}.svg`
+        src: `./static/img/cards/${i.value + ' ' + i.suit}.svg`,
+        alt: `${i.value + ' ' + i.suit}.svg`
       }
     }, {
       tag: 'img',
       cls: ['rubashka'],
       attrs: {
-        src: './static/img/rubashka.png'
+        src: './static/img/rubashka.png',
+        alt: `${i.value + ' ' + i.suit}.svg`,
+        data: `${i.value + ' ' + i.suit}`
       }
     }]
   };
@@ -70,6 +77,20 @@ document.addEventListener('click', event => {
   const target = event.target;
   console.log(target);
 });
+let firstCard;
+let secondCard;
+let hasFlippedCard = false;
+function cardsMatch() {
+  if (!hasFlippedCard) {
+    hasFlippedCard = true;
+    console.log('true');
+    firstCard = this;
+  } else {
+    hasFlippedCard = false;
+    console.log('false');
+    secondCard = this;
+  }
+}
 
 /***/ }),
 
@@ -116,6 +137,9 @@ const boxActive = document.querySelector('.box-active');
 const boxBtn = boxActive.querySelector('.box-btn');
 const btnChooseDiff = document.querySelector('.btn_diff-submit');
 btnChooseDiff.addEventListener('click', event => {
+  // window.firstCard = firstCard;
+  // window.secondCard = secondCard;
+
   event.preventDefault;
   const target = event.target;
   console.log(target);
@@ -134,13 +158,13 @@ btnChooseDiff.addEventListener('click', event => {
   (0,_cardField__WEBPACK_IMPORTED_MODULE_5__.visualCardField)(window.application.takeCards);
   switch (window.application.takeCards.length) {
     case 6:
-      (0,_timer__WEBPACK_IMPORTED_MODULE_6__.timer)(60);
+      (0,_timer__WEBPACK_IMPORTED_MODULE_6__.timer)(65);
       break;
     case 12:
-      (0,_timer__WEBPACK_IMPORTED_MODULE_6__.timer)(1.5 * 60);
+      (0,_timer__WEBPACK_IMPORTED_MODULE_6__.timer)(95);
       break;
     case 18:
-      (0,_timer__WEBPACK_IMPORTED_MODULE_6__.timer)(2 * 60);
+      (0,_timer__WEBPACK_IMPORTED_MODULE_6__.timer)(125);
       break;
     default:
       console.warn(Error);
@@ -149,14 +173,20 @@ btnChooseDiff.addEventListener('click', event => {
   const rubFlip = document.querySelectorAll('.rubashka');
   const fieldFlip = document.querySelectorAll('.field-active');
   const cardFlip = document.querySelectorAll('.card');
+  setTimeout(slowAlert, 5000);
+  function slowAlert() {
+    fieldFlip.forEach(card => card.classList.remove('flipped'));
+  }
   function flipCard() {
     console.log('flip');
     this.classList.toggle('flipped');
+    (0,_cardField__WEBPACK_IMPORTED_MODULE_5__.cardsMatch)();
   }
-  rubFlip.forEach(card => card.addEventListener('click', flipCard));
   fieldFlip.forEach(card => card.addEventListener('click', flipCard));
-  cardFlip.forEach(card => card.addEventListener('click', flipCard));
+  // cardFlip.forEach((card) => card.addEventListener('click', flipCard));
+  // rubFlip.forEach((card) => card.addEventListener('click', flipCard));
 });
+
 const boxDiff = document.querySelectorAll('.box-diff');
 const boxNumber = document.querySelectorAll('.box-number');
 let boxDataSetValue; //dataset-value
@@ -336,7 +366,8 @@ const logic = window.application = {
   generateCards: [],
   takeCards: [],
   flippedCards: 0,
-  flipTotal: 0
+  flipTotal: 0,
+  hasFlippedCard: false
 };
 
 // - Время, затраченное на игру.
