@@ -128,6 +128,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 4px;
 }
 
 .box-box--active {
@@ -166,17 +167,111 @@ body {
     align-items: center;
 }
 
-.box-field-active{
-    display: flex;
+.box-field-active {
+    display: grid;
+    // row-gap: 100px;
+    justify-content: center;
+    margin-top: 60px;
+}
+.box-field-active--small {
+    grid-template-columns: 100px 100px 100px;
+}
+.box-field-active--medium {
+    grid-template-columns: 100px 100px 100px 100px;
+}
+.box-field-active--large {
+    grid-template-columns: repeat(6, 100px);
+}
+
+.field-active {
+    position: relative;
+    cursor: pointer;
+    // background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+    margin: auto;
+    width: 75px;
+    height: 100px;
+}
+
+.rubashka {
+    // background: url(./res/img/rubashka.png);
+    width: 96px;
+    height: 133px;
+    background-size: cover;
+}
+
+.card,
+.rubashka {
+    position: absolute;
+    border-radius: 5px;
+    // width: 100%;
+    // height: 100%;
+    // background: url(./res/img/rubashka.png);
+
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+}
+
+.card {
+    font-size: 28pt;
+    text-align: center;
+    line-height: 100px;
+    transform: rotateY(180deg);
+    user-select: none;
+}
+
+.field-active.flipped .rubashka {
+    transform: rotateY(180deg) rotateZ(50deg);
+}
+
+.field-active.flipped .card {
+    transform: rotateY(0) rotateZ(0);
 }
 
 .btn_diff-submit:hover {
     background-color: black;
 }
-.btn_diff-back:hover{
+.btn_diff-back:hover {
     background-color: black;
 }
 
 .hide {
     display: none;
+}
+
+// .swal2-html-container {
+//     width: 195px;
+//     padding-left: 133px;
+//     display: block;
+//     color: #000000;
+// }
+
+// .swal2-title {
+//     display: grid;
+//     background: #c2f5ff;
+//     border-radius: 12px;
+// }
+
+.swal2-icon-show {
+    border-color: white;
+}
+
+.swal2-popup {
+    display: none;
+    position: relative;
+    box-sizing: border-box;
+    grid-template-columns: minmax(0, 100%);
+    width: 32em;
+    max-width: 100%;
+    padding: 0 0 1.25em;
+    border: none;
+    border-radius: 5px;
+    background: #c2f5ff;
+    border-radius: 12px;
+    color: #545454;
+    font-family: inherit;
+    font-size: 1rem;
 }

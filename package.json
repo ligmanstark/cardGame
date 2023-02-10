@@ -1,5 +1,48 @@
 {
-  "dependencies": {
-    "pug": "3.0.2"
-  }
+	"dependencies": {
+		"notyf": "3.10.0",
+		"pug": "3.0.2",
+		"sweetalert2": "11.7.1",
+		"webpack-cli": "5.0.1"
+	},
+	"name": "cardgame",
+	"description": "SkyPro",
+	"version": "1.0.0",
+	"main": "gameCore.js",
+	"directories": {
+		"lib": "lib"
+	},
+	"devDependencies": {
+		"babel-loader": "9.1.2",
+		"copy-webpack-plugin": "11.0.0",
+		"css-loader": "6.7.3",
+		"css-minimizer-webpack-plugin": "4.2.2",
+		"eslint": "8.32.0",
+		"eslint-config-prettier": "8.6.0",
+		"eslint-plugin-prettier": "4.2.1",
+		"html-webpack-plugin": "5.5.0",
+		"husky": "8.0.3",
+		"mini-css-extract-plugin": "2.7.2",
+		"prettier": "2.8.3",
+		"style-loader": "3.3.1",
+		"svg-inline-loader": "0.8.2",
+		"webpack-dev-server": "4.11.1"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"format": "prettier --write ./src/",
+		"dev": "webpack --mode development",
+		"build": "set NODE_ENV=production&&npm start",
+		"start": "webpack-dev-server --open"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ligmanstark/cardGame.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ligmanstark/cardGame/issues"
+	},
+	"homepage": "https://github.com/ligmanstark/cardGame#readme"
 }
