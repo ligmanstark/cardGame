@@ -76,27 +76,18 @@ const visualCardField = decka => {
       break;
   }
 };
-document.addEventListener('click', event => {
-  const target = event.target;
-  console.log(target);
-});
 let hasFlippedCard = false;
 function cardsMatch(data) {
   const fieldFlip = document.querySelectorAll('.field-active');
-  console.log(data);
   if (!hasFlippedCard) {
     hasFlippedCard = true;
-    console.log('true');
     window.application.firstCard = data;
   } else {
     hasFlippedCard = false;
-    console.log('false');
     window.application.secondCard = data;
     if (window.application.firstCard === window.application.secondCard) {
       fieldFlip.forEach(card => card.removeEventListener('click', _chooseDiff__WEBPACK_IMPORTED_MODULE_0__.flipCard));
-      console.log(fieldFlip);
       window.application.fieldFlipConvert = Array.from(fieldFlip);
-      console.log(window.application.fieldFlipConvert);
       window.application.diff = window.application.diff - 2;
       if (window.application.diff === 0) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
@@ -170,19 +161,11 @@ const boxActive = document.querySelector('.box-active');
 const boxBtn = boxActive.querySelector('.box-btn');
 const btnChooseDiff = document.querySelector('.btn_diff-submit');
 btnChooseDiff.addEventListener('click', event => {
-  // window.firstCard = firstCard;
-  // window.secondCard = secondCard;
-
   event.preventDefault;
-  const target = event.target;
-  console.log(target);
-  console.log('тык');
-  console.log(event);
   boxActive.classList.add('hide');
   _route__WEBPACK_IMPORTED_MODULE_4__.todoRender.appendChild(_route__WEBPACK_IMPORTED_MODULE_4__.game);
   _route__WEBPACK_IMPORTED_MODULE_4__.game.classList.remove('hide');
   btnBack = document.querySelector('.btn_diff-back');
-  console.log(btnBack);
   _route__WEBPACK_IMPORTED_MODULE_4__.game.appendChild(_cardField__WEBPACK_IMPORTED_MODULE_5__.boxFieldActive);
   timeBox = document.querySelector('.box-time');
   card.forEach(el => {
@@ -211,15 +194,11 @@ btnChooseDiff.addEventListener('click', event => {
     fieldFlip.forEach(card => card.classList.remove('flipped'));
   }
   function flipCard() {
-    console.log('flip');
     this.classList.add('flipped');
     (0,_cardField__WEBPACK_IMPORTED_MODULE_5__.cardsMatch)(this.getAttribute('data'));
   }
   fieldFlip.forEach(card => card.addEventListener('click', flipCard));
-  // cardFlip.forEach((card) => card.addEventListener('click', flipCard));
-  // rubFlip.forEach((card) => card.addEventListener('click', flipCard));
 });
-
 const boxDiff = document.querySelectorAll('.box-diff');
 const boxNumber = document.querySelectorAll('.box-number');
 let boxDataSetValue; //dataset-value
@@ -242,9 +221,6 @@ boxNumber.forEach(box => {
     boxDataSetValue = box.dataset.value;
     boxDataSetStatus = 'start';
     boxDataSetGanerateDecka = _deck_generate_js__WEBPACK_IMPORTED_MODULE_1__["default"].cards;
-    console.log(event);
-    console.log(boxDataSetValue);
-    console.log(window.application);
     window.application.status = boxDataSetStatus;
     window.application.diff = boxDataSetValue;
     window.application.generateCards = boxDataSetGanerateDecka;
@@ -277,18 +253,14 @@ function creatorArrDecka(n, row) {
     [...cardbox2] = temporaryStorage || [];
     subcardbox = [...cardbox1, ...cardbox2];
   }
-  console.log(cardbox1, cardbox2);
   shuffle(subcardbox);
-  console.log('изначальный Субкардбокс', subcardbox);
   cardbox1.length = 0;
   cardbox2.length = 0;
   for (let i = 0; i < Math.ceil(subcardbox.length / row); i++) {
     finalbox[i] = subcardbox.slice(i * row, i * row + row);
   }
-  console.log('итоговый бокс', finalbox);
   window.application.takeCards = finalbox.flat(Infinity);
   fieldActive = (0,_templateEngine__WEBPACK_IMPORTED_MODULE_3__["default"])(window.application.takeCards.map(_cardField__WEBPACK_IMPORTED_MODULE_5__.cardFieldRender));
-  console.log(fieldActive);
   _cardField__WEBPACK_IMPORTED_MODULE_5__.boxFieldActive.appendChild(fieldActive);
   card = document.querySelectorAll('.field-active');
   card.forEach(el => {
@@ -296,7 +268,6 @@ function creatorArrDecka(n, row) {
   });
 }
 function flipCard() {
-  console.log('flip');
   this.classList.add('flipped');
   (0,_cardField__WEBPACK_IMPORTED_MODULE_5__.cardsMatch)(this.getAttribute('data'));
 }
@@ -316,10 +287,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _deck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./deck */ "./lib/deck.js");
 
-console.log(_deck__WEBPACK_IMPORTED_MODULE_0__["default"]);
 const deck = new _deck__WEBPACK_IMPORTED_MODULE_0__["default"]();
 deck.shuffle();
-console.log(deck.cards);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (deck);
 
 /***/ }),
@@ -335,10 +304,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// const SUITS = ['♠', '♣', '♦', '♥'];
 const SUITS = ['бубны', 'крести', 'черви', 'пики'];
-
-// const VALUES = ['6', '7', '8', '9', '10', 'B', 'Q', 'K', 'A'];
 const VALUES = ['6', '7', '8', '9', '10', 'валет', 'дама', 'король', 'туз'];
 class Deck {
   constructor(cards = freshDeck()) {
@@ -369,13 +335,6 @@ function freshDeck() {
     });
   });
 }
-
-// // const CARDS  = {
-// //     card:  ["6","7","8","9","10","B","Q","K","A"], //карты
-// //     suit:  ["&#9829","&#9827","&#9824","&#9830"],//масти
-// //     val: [1,2,3,4,5,6,7,8,9]//ранг карты
-// //  }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Deck);
 
 /***/ }),
@@ -505,65 +464,6 @@ function backOnChooseDiff() {
 }
 window.backOnChooseDiff = backOnChooseDiff;
 
-// {
-//   tag: 'div',
-//   cls: 'field-active',
-//   content:[ {
-//     tag: 'div',
-//     cls: 'suit',
-//     content: i.suit
-//   }, {
-//     tag: 'div',
-//     cls: 'value',
-//     content: i.value
-//   }]
-// }
-
-// const exampleArr = [1, [1, 2, [3, 4]], [5, 6]];
-
-// const fieldActive = templateEngine(window.application.takeCards.map(cardFieldRender));
-
-// function todoToHTML(render) {
-
-//   todoRender.insertAdjacentHTML('beforeend', render);
-//   const containerFieldActive = document.querySelector('.field-active');
-
-//   // cardFieldRender()
-// };
-
-// const gameField = `<div class="game-field">
-// <div class="box-d">
-//   <div class="box-timer">
-//     <div class="box-numbers">
-//       <p class="box-min">min</p>
-//       <p class="box-sec">sec </p>
-//     </div>
-//     <div class="box-time">00:00 </div>
-//   </div>
-//   <div class="box-box--active">
-
-//   </div>
-// </div>
-// <div class="field-active">Тут будут карточки, но не сегодня</div>
-// </div>
-// `;
-
-// const backBox = document.querySelector('.box-box--active');
-// const btnBack = document.createElement('button');
-// btnBack.textContent = 'Начать заново';
-// btnBack.setAttribute('type', 'sumbit');
-// btnBack.classList.add('btn_diff-back');
-
-// btnBack.addEventListener('click', (event) => {
-//   event.preventDefault;
-//   const target = event.target;
-//   const gameField = document.querySelector('.game-field');
-//   console.log(event);
-//   gameField.classList.add('hide');
-//   boxActive.classList.remove('hide');
-
-// });
-
 /***/ }),
 
 /***/ "./lib/templateEngine.js":
@@ -686,7 +586,7 @@ var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n@font-face {\n  font-family: \"SkyEng\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"wolf2\");\n}\n* {\n  margin: 0;\n  padding: 0;\n}\n\nbody {\n  font-family: SkyEng, Arial;\n}\n\n.content {\n  position: relative;\n  width: 100%;\n  height: 774px;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  align-content: center;\n  justify-content: center;\n  align-items: center;\n  background: #004980;\n}\n\n.box-active {\n  width: 480px;\n  height: 459px;\n  left: 272px;\n  top: 158px;\n  background: #c2f5ff;\n  border-radius: 12px;\n}\n\n.box-h2 {\n  text-align: center;\n  padding-top: 52px;\n}\n\n.box-number {\n  width: 96px;\n  height: 98px;\n  left: 587px;\n  top: 354px;\n  font-family: \"StratosSkyeng\";\n  font-style: normal;\n  font-weight: 400;\n  font-size: 64px;\n  line-height: 72px;\n  display: flex;\n  align-items: center;\n  text-align: center;\n  color: #0080c1;\n  justify-content: center;\n}\n\n.box-diffs {\n  gap: 24px;\n  display: flex;\n  justify-content: center;\n  margin-top: 48px;\n}\n\n.box-diff,\n.box-number {\n  width: 98px;\n  height: 98px;\n  left: 585px;\n  top: 354px;\n  background: #ffffff;\n  border-radius: 12px;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n}\n\n.box-btn {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  margin-top: 66px;\n}\n\n.btn_diff-submit,\n.btn_diff-back {\n  width: 246px;\n  height: 48px;\n  left: 389px;\n  top: 519px;\n  /* Pres → Caption S */\n  font-family: \"StratosSkyeng\";\n  font-style: normal;\n  font-weight: 400;\n  font-size: 24px;\n  line-height: 32px;\n  /* or 133% */\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  font-feature-settings: \"pnum\" on, \"lnum\" on;\n  color: #ffffff;\n  width: 246px;\n  height: 50px;\n  left: 389px;\n  top: 519px;\n  background: #7ac100;\n  border-radius: 12px;\n}\n\n.game-field {\n  position: relative;\n  width: 100%;\n  height: 774px;\n  background: #004980;\n}\n\n.box-d {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  margin: 4px;\n}\n\n.box-box--active {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n}\n\n.box-numbers {\n  display: flex;\n  gap: 24px;\n  margin-left: 24px;\n}\n\n.box-time {\n  font-size: 48px;\n}\n\n.box-sec {\n  margin-left: 18px;\n}\n\n.grey-focus {\n  background-color: darkgray;\n  width: 98px;\n  height: 98px;\n  left: 585px;\n  top: 354px;\n  border-radius: 12px;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  text-align: center;\n  font-size: 16px;\n  align-items: center;\n}\n\n.box-field-active {\n  display: grid;\n  justify-content: center;\n  margin-top: 60px;\n}\n\n.box-field-active--small {\n  grid-template-columns: 100px 100px 100px;\n}\n\n.box-field-active--medium {\n  grid-template-columns: 100px 100px 100px 100px;\n}\n\n.box-field-active--large {\n  grid-template-columns: repeat(6, 100px);\n}\n\n.field-active {\n  position: relative;\n  cursor: pointer;\n  color: #fff;\n  border-radius: 5px;\n  padding: 20px;\n  font-size: 150%;\n  margin: auto;\n  width: 75px;\n  height: 100px;\n}\n\n.rubashka {\n  width: 96px;\n  height: 133px;\n  background-size: cover;\n}\n\n.card,\n.rubashka {\n  position: absolute;\n  border-radius: 5px;\n  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);\n  -webkit-backface-visibility: hidden;\n          backface-visibility: hidden;\n}\n\n.card {\n  font-size: 28pt;\n  text-align: center;\n  line-height: 100px;\n  transform: rotateY(180deg);\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n\n.field-active.flipped .rubashka {\n  transform: rotateY(180deg) rotateZ(50deg);\n}\n\n.field-active.flipped .card {\n  transform: rotateY(0) rotateZ(0);\n}\n\n.btn_diff-submit:hover {\n  background-color: black;\n}\n\n.btn_diff-back:hover {\n  background-color: black;\n}\n\n.hide {\n  display: none;\n}\n\n.swal2-icon-show {\n  border-color: white;\n}\n\n.swal2-popup {\n  display: none;\n  position: relative;\n  box-sizing: border-box;\n  grid-template-columns: minmax(0, 100%);\n  width: 32em;\n  max-width: 100%;\n  padding: 0 0 1.25em;\n  border: none;\n  border-radius: 5px;\n  background: #c2f5ff;\n  border-radius: 12px;\n  color: #545454;\n  font-family: inherit;\n  font-size: 1rem;\n}/*# sourceMappingURL=style.css.map */", "",{"version":3,"sources":["webpack://./style.css","webpack://./style.scss"],"names":[],"mappings":"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","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\r\n@font-face {\r\n  font-family: \"SkyEng\";\r\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"wolf2\");\r\n}\r\n* {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\nbody {\r\n  font-family: SkyEng, Arial;\r\n}\r\n\r\n.content {\r\n  position: relative;\r\n  width: 100%;\r\n  height: 774px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: wrap;\r\n  align-content: center;\r\n  justify-content: center;\r\n  align-items: center;\r\n  background: #004980;\r\n}\r\n\r\n.box-active {\r\n  width: 480px;\r\n  height: 459px;\r\n  left: 272px;\r\n  top: 158px;\r\n  background: #c2f5ff;\r\n  border-radius: 12px;\r\n}\r\n\r\n.box-h2 {\r\n  text-align: center;\r\n  padding-top: 52px;\r\n}\r\n\r\n.box-number {\r\n  width: 96px;\r\n  height: 98px;\r\n  left: 587px;\r\n  top: 354px;\r\n  font-family: \"StratosSkyeng\";\r\n  font-style: normal;\r\n  font-weight: 400;\r\n  font-size: 64px;\r\n  line-height: 72px;\r\n  display: flex;\r\n  align-items: center;\r\n  text-align: center;\r\n  color: #0080c1;\r\n  justify-content: center;\r\n}\r\n\r\n.box-diffs {\r\n  gap: 24px;\r\n  display: flex;\r\n  justify-content: center;\r\n  margin-top: 48px;\r\n}\r\n\r\n.box-diff,\r\n.box-number {\r\n  width: 98px;\r\n  height: 98px;\r\n  left: 585px;\r\n  top: 354px;\r\n  background: #ffffff;\r\n  border-radius: 12px;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n}\r\n\r\n.box-btn {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n  margin-top: 66px;\r\n}\r\n\r\n.btn_diff-submit,\r\n.btn_diff-back {\r\n  width: 246px;\r\n  height: 48px;\r\n  left: 389px;\r\n  top: 519px;\r\n  /* Pres → Caption S */\r\n  font-family: \"StratosSkyeng\";\r\n  font-style: normal;\r\n  font-weight: 400;\r\n  font-size: 24px;\r\n  line-height: 32px;\r\n  /* or 133% */\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  text-align: center;\r\n  font-feature-settings: \"pnum\" on, \"lnum\" on;\r\n  color: #ffffff;\r\n  width: 246px;\r\n  height: 50px;\r\n  left: 389px;\r\n  top: 519px;\r\n  background: #7ac100;\r\n  border-radius: 12px;\r\n}\r\n\r\n.game-field {\r\n  position: relative;\r\n  width: 100%;\r\n  height: 774px;\r\n  background: #004980;\r\n}\r\n\r\n.box-d {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-between;\r\n  margin: 4px;\r\n}\r\n\r\n.box-box--active {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n}\r\n\r\n.box-numbers {\r\n  display: flex;\r\n  gap: 24px;\r\n  margin-left: 24px;\r\n}\r\n\r\n.box-time {\r\n  font-size: 48px;\r\n}\r\n\r\n.box-sec {\r\n  margin-left: 18px;\r\n}\r\n\r\n.grey-focus {\r\n  background-color: darkgray;\r\n  width: 98px;\r\n  height: 98px;\r\n  left: 585px;\r\n  top: 354px;\r\n  border-radius: 12px;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n  text-align: center;\r\n  font-size: 16px;\r\n  align-items: center;\r\n}\r\n\r\n.box-field-active {\r\n  display: grid;\r\n  justify-content: center;\r\n  margin-top: 60px;\r\n}\r\n\r\n.box-field-active--small {\r\n  grid-template-columns: 100px 100px 100px;\r\n}\r\n\r\n.box-field-active--medium {\r\n  grid-template-columns: 100px 100px 100px 100px;\r\n}\r\n\r\n.box-field-active--large {\r\n  grid-template-columns: repeat(6, 100px);\r\n}\r\n\r\n.field-active {\r\n  position: relative;\r\n  cursor: pointer;\r\n  color: #fff;\r\n  border-radius: 5px;\r\n  padding: 20px;\r\n  font-size: 150%;\r\n  margin: auto;\r\n  width: 75px;\r\n  height: 100px;\r\n}\r\n\r\n.rubashka {\r\n  width: 96px;\r\n  height: 133px;\r\n  background-size: cover;\r\n}\r\n\r\n.card,\r\n.rubashka {\r\n  position: absolute;\r\n  border-radius: 5px;\r\n  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);\r\n  -webkit-backface-visibility: hidden;\r\n          backface-visibility: hidden;\r\n}\r\n\r\n.card {\r\n  font-size: 28pt;\r\n  text-align: center;\r\n  line-height: 100px;\r\n  transform: rotateY(180deg);\r\n  -webkit-user-select: none;\r\n     -moz-user-select: none;\r\n      -ms-user-select: none;\r\n          user-select: none;\r\n}\r\n\r\n.field-active.flipped .rubashka {\r\n  transform: rotateY(180deg) rotateZ(50deg);\r\n}\r\n\r\n.field-active.flipped .card {\r\n  transform: rotateY(0) rotateZ(0);\r\n}\r\n\r\n.btn_diff-submit:hover {\r\n  background-color: black;\r\n}\r\n\r\n.btn_diff-back:hover {\r\n  background-color: black;\r\n}\r\n\r\n.hide {\r\n  display: none;\r\n}\r\n\r\n.swal2-icon-show {\r\n  border-color: white;\r\n}\r\n\r\n.swal2-popup {\r\n  display: none;\r\n  position: relative;\r\n  box-sizing: border-box;\r\n  grid-template-columns: minmax(0, 100%);\r\n  width: 32em;\r\n  max-width: 100%;\r\n  padding: 0 0 1.25em;\r\n  border: none;\r\n  border-radius: 5px;\r\n  background: #c2f5ff;\r\n  border-radius: 12px;\r\n  color: #545454;\r\n  font-family: inherit;\r\n  font-size: 1rem;\r\n}/*# sourceMappingURL=style.css.map */", "",{"version":3,"sources":["webpack://./style.css","webpack://./style.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACAhB;EACI,qBAAA;EACA,4DAAA;ADEJ;ACCA;EACI,SAAA;EACA,UAAA;ADCJ;;ACEA;EACI,0BAAA;ADCJ;;ACEA;EACI,kBAAA;EACA,WAAA;EACA,aAAA;EACA,aAAA;EACA,sBAAA;EACA,eAAA;EACA,qBAAA;EACA,uBAAA;EACA,mBAAA;EAEA,mBAAA;ADAJ;;ACEA;EACI,YAAA;EACA,aAAA;EACA,WAAA;EACA,UAAA;EAEA,mBAAA;EACA,mBAAA;ADAJ;;ACGA;EACI,kBAAA;EACA,iBAAA;ADAJ;;ACGA;EACI,WAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EACA,4BAAA;EACA,kBAAA;EACA,gBAAA;EACA,eAAA;EACA,iBAAA;EACA,aAAA;EACA,mBAAA;EACA,kBAAA;EACA,cAAA;EACA,uBAAA;ADAJ;;ACGA;EACI,SAAA;EACA,aAAA;EACA,uBAAA;EACA,gBAAA;ADAJ;;ACGA;;EAEI,WAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EAEA,mBAAA;EACA,mBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;ADDJ;;ACIA;EACI,aAAA;EACA,mBAAA;EACA,uBAAA;EACA,gBAAA;ADDJ;;ACIA;;EAEI,YAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EAEA,qBAAA;EAEA,4BAAA;EACA,kBAAA;EACA,gBAAA;EACA,eAAA;EACA,iBAAA;EACA,YAAA;EAEA,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,kBAAA;EACA,2CAAA;EAEA,cAAA;EACA,YAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EAEA,mBAAA;EACA,mBAAA;ADNJ;;ACSA;EACI,kBAAA;EACA,WAAA;EACA,aAAA;EACA,mBAAA;ADNJ;;ACSA;EACI,aAAA;EACA,mBAAA;EACA,8BAAA;EACA,WAAA;ADNJ;;ACSA;EACI,aAAA;EACA,mBAAA;EACA,uBAAA;ADNJ;;ACSA;EACI,aAAA;EACA,SAAA;EACA,iBAAA;ADNJ;;ACSA;EACI,eAAA;ADNJ;;ACSA;EACI,iBAAA;ADNJ;;ACUA;EACI,0BAAA;EACA,WAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EACA,mBAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;EACA,kBAAA;EACA,eAAA;EACA,mBAAA;ADPJ;;ACUA;EACI,aAAA;EAEA,uBAAA;EACA,gBAAA;ADRJ;;ACUA;EACI,wCAAA;ADPJ;;ACSA;EACI,8CAAA;ADNJ;;ACQA;EACI,uCAAA;ADLJ;;ACQA;EACI,kBAAA;EACA,eAAA;EAEA,WAAA;EACA,kBAAA;EACA,aAAA;EACA,eAAA;EACA,YAAA;EACA,WAAA;EACA,aAAA;ADNJ;;ACSA;EAEI,WAAA;EACA,aAAA;EACA,sBAAA;ADPJ;;ACUA;;EAEI,kBAAA;EACA,kBAAA;EAKA,uDAAA;EACA,mCAAA;UAAA,2BAAA;ADXJ;;ACcA;EACI,eAAA;EACA,kBAAA;EACA,kBAAA;EACA,0BAAA;EACA,yBAAA;KAAA,sBAAA;MAAA,qBAAA;UAAA,iBAAA;ADXJ;;ACcA;EACI,yCAAA;ADXJ;;ACcA;EACI,gCAAA;ADXJ;;ACcA;EACI,uBAAA;ADXJ;;ACaA;EACI,uBAAA;ADVJ;;ACaA;EACI,aAAA;ADVJ;;AC0BA;EACI,mBAAA;ADvBJ;;AC0BA;EACI,aAAA;EACA,kBAAA;EACA,sBAAA;EACA,sCAAA;EACA,WAAA;EACA,eAAA;EACA,mBAAA;EACA,YAAA;EACA,kBAAA;EACA,mBAAA;EACA,mBAAA;EACA,cAAA;EACA,oBAAA;EACA,eAAA;ADvBJ,CAAA,oCAAA","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
