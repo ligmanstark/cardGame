@@ -14,6 +14,11 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.ts$/,
+				use: 'ts-loader',
+				exclude: /node_modules/,
+			},
+			{
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: ['babel-loader'],
@@ -42,6 +47,9 @@ module.exports = {
 			template: './index.html',
 		}),
 	],
+	resolve: {
+		extensions: ['.ts', '.js'],
+	},
 	optimization: {
 		minimizer: ['...', new CssMinimizerPlugin()],
 	},
