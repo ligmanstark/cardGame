@@ -1,60 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>Card Game</title>
+		<link href="style.css" rel="stylesheet" />
+		<link type="image/x-icon" href="res/1f0cf.png" rel="shortcut icon" />
+	</head>
 
-  <head>
-    <title>Card Game</title>
-    <link href="style.css" rel="stylesheet">
-    <link type="image/x-icon" href="res/1f0cf.png"
-      rel="shortcut icon">
-  </head>
-
-  <body>
-    <div class="content">
-      <div class="box-active">
-        <div class="box-h2">
-          <h2 class="box">Выбор сложности</h2>
-        </div>
-        <div class="box-diffs">
-          <div class="box-diff">
-            <div class="box-number" data-focus=""
-              data-value="6">1</div>
-          </div>
-          <div class="box-diff">
-            <div class="box-number" data-focus=""
-              data-value="12">2</div>
-          </div>
-          <div class="box-diff">
-            <div class="box-number" data-focus=""
-              data-value="18">3</div>
-          </div>
-        </div>
-        <div class="box-btn">
-          <button class="btn_diff-submit"
-            type="submit">Старт</button>
-        </div>
-      </div>
-    </div>
-    <script src="./lib/deck.js" type="module"></script>
-    <script src="./lib/deck-generate.js"
-      type="module"></script>
-    <script src="./lib/templateEngine.js"
-      type="module"> </script>
-    <script src="./lib/gameCore.js" type="module"></script>
-    <script src="./lib/chooseDiff.js"
-      type="module"></script>
-    <script src="./lib/route.js" type="module"> </script>
-    <script src="./lib/cardField.js"
-      type="module"> </script>
-    <script src="./lib/timer.js" type="module"></script>
-    <script src="./node_modules/notyf/notyf.min.js"
-      type="module"></script>
-    <script
-      src="./node_modules/sweetalert2/dist/sweetalert2.all.min.js"
-      type="module"></script>
-    <script type="module">
-      import backOnChooseDiff from "../lib/route.js"
-      export const notyf = new Notyf();
-    </script>
-  </body>
-
+	<body>
+		<div class="content">
+			<div class="box-active">
+				<div class="box-h2">
+					<h2 class="box">Выбор сложности</h2>
+				</div>
+				<div class="box-diffs">
+					<div class="box-diff">
+						<div class="box-number" data-focus="" data-value="6">
+							1
+						</div>
+					</div>
+					<div class="box-diff">
+						<div class="box-number" data-focus="" data-value="12">
+							2
+						</div>
+					</div>
+					<div class="box-diff">
+						<div class="box-number" data-focus="" data-value="18">
+							3
+						</div>
+					</div>
+				</div>
+				<div class="box-btn">
+					<button class="btn_diff-submit" type="submit">Старт</button>
+				</div>
+			</div>
+		</div>
+		<script src="./lib/deck.js" type="module"></script>
+		<script src="./lib/deck-generate.js" type="module"></script>
+		<script src="./lib/templateEngine.js" type="module"></script>
+		<script src="./lib/gameCore.js" type="module"></script>
+		<script src="./lib/chooseDiff.js" type="module"></script>
+		<script src="./lib/route.js" type="module"></script>
+		<script src="./lib/cardField.js" type="module"></script>
+		<script src="./lib/timer.js" type="module"></script>
+		<script src="./node_modules/notyf/notyf.min.js" type="module"></script>
+		<script
+			src="./node_modules/sweetalert2/dist/sweetalert2.all.min.js"
+			type="module"
+		></script>
+		<script type="module">
+			import backOnChooseDiff from '../lib/route.js';
+			export const notyf = new Notyf();
+		</script>
+	</body>
 </html>

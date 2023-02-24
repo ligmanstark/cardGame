@@ -1,15 +1,18 @@
 {
-    "env": {
-      "es6": true
-    },
-    "rules": {
-      "no-var": "error",
-      "semi": "error",
-      "indent": "error",
-      "space-in-parens": "error",
-      "no-multiple-empty-lines": "error",
-      "prefer-const": "error",
-      // "no-use-before-define": "error"
-    }
-
-  }
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true
+	},
+	"extends": ["eslint:recommended", "prettier"],
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["prettier", "@typescript-eslint"],
+	"parserOptions": { "ecmaVersion": 2020 },
+	"rules": {
+		"prettier/prettier": "error",
+		"camelcase": ["error"],
+		"eqeqeq": ["error", "always"],
+		"no-unused-vars": "off"
+	},
+	"root": true
+}
