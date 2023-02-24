@@ -1,8 +1,13 @@
 {
 	"dependencies": {
-		"jest-transform-css": "^6.0.1",
+		"@typescript-eslint/parser": "5.53.0",
+		"jest-transform-css": "6.0.1",
 		"notyf": "3.10.0",
 		"pug": "3.0.2",
+		"stylelint": "^15.2.0",
+		"stylelint-config-prettier": "^9.0.5",
+		"stylelint-config-standard": "30.0.1",
+		"stylelint-prettier": "^3.0.0",
 		"sweetalert2": "11.7.1",
 		"webpack-cli": "5.0.1"
 	},
@@ -14,13 +19,15 @@
 		"lib": "lib"
 	},
 	"devDependencies": {
-		"@babel/plugin-transform-modules-commonjs": "^7.20.11",
+		"@babel/plugin-transform-modules-commonjs": "7.20.11",
+		"@typescript-eslint/eslint-plugin": "^5.53.0",
 		"babel-loader": "9.1.2",
 		"copy-webpack-plugin": "11.0.0",
 		"css-loader": "6.7.3",
 		"css-minimizer-webpack-plugin": "4.2.2",
 		"eslint": "8.32.0",
 		"eslint-config-prettier": "8.6.0",
+		"eslint-plugin-jsx-a11y": "^6.7.1",
 		"eslint-plugin-prettier": "4.2.1",
 		"html-webpack-plugin": "5.5.0",
 		"husky": "8.0.3",
@@ -36,10 +43,14 @@
 	},
 	"scripts": {
 		"test": "jest",
-		"format": "prettier --write ./src/",
+		"lint:css": "stylelint ./**.css",
+		"lint:js": "eslint ./lib/**.js",
+		"prepare": "husky install",
+		"format": "prettier --write .",
 		"dev": "webpack --mode development",
 		"build": "set NODE_ENV=production&&npm start",
-		"start": "webpack-dev-server --open"
+		"start": "webpack-dev-server --open",
+		"lint": "npm run lint:js && npm run lint:css"
 	},
 	"repository": {
 		"type": "git",

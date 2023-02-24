@@ -4,8 +4,8 @@ module.exports = {
 	transform: {
 		'\\.js$': '<rootDir>/node_modules/babel-jest',
 		'.+\\.(css|styl|less|sass|scss)$': 'jest-transform-css',
-		"^.+\\.svg$": "<rootDir>/svgTransform.js",
-		"^.+\\.png$": "<rootDir>/pngTransform.js"
+		'^.+\\.svg$': '<rootDir>/svgTransform.js',
+		'^.+\\.png$': '<rootDir>/pngTransform.js',
 	},
 	moduleNameMapper: {
 		moduleNameMapper: {

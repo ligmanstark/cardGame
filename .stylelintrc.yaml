@@ -1,7 +1,0 @@
-extends:
-[
-  'stylelint-config-standart',
-  'stylelint-config-prettier',
-  'stylelint-config-standart-scss',
-  'stylelint-prettier/recommended',
-]
