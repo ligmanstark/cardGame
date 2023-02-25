@@ -78,7 +78,6 @@ body {
 }
 
 .box-btn {
-
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -87,7 +86,6 @@ body {
 
 .btn_diff-submit,
 .btn_diff-back {
-
 	/* Pres → Caption S */
 	font-family: StratosSkyeng;
 	font-style: normal;
@@ -108,7 +106,6 @@ body {
 	top: 519px;
 	background: #7ac100;
 	border-radius: 12px;
-
 }
 
 .game-field {
@@ -174,7 +171,6 @@ body {
 	grid-template-columns: 100px 100px 100px 100px;
 }
 
-
 .box-field-active--large {
 	grid-template-columns: repeat(6, 100px);
 }
@@ -227,7 +223,6 @@ body {
 
 .btn_diff-back:hover {
 	background-color: black;
-
 }
 
 .hide {
